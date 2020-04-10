@@ -44,10 +44,20 @@ pl4 <- df %>%
   facet_wrap(~ order) + theme_bw() + ylab("Value [g]") + xlab("Time [seconds]")
   
 
-emf("pl4.emf", height = 6, width = 6)
+emf("pl4.emf", height = 4.5, width = 4.5)
 print(pl4)
 dev.off()
 
+pl3b <- df %>%
+  filter(group == "stz 15", order == 6) %>% mutate(time2 = lubridate::seconds(time2 / 1000)) %>%
+  ggplot(aes(x = time2, y = value)) + geom_line() + 
+  theme_bw() + ylab("Value [g]") + xlab("Time [seconds]")
 
+
+emf("pl3b.emf", height = 6, width = 6)
+print(pl3b)
+dev.off()
+
+save.image(file = "data.RData")
 
 
